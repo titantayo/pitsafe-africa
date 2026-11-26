@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>PITSAFE WATEROPS</title>
+<style>
+:root{--bg:#07111f;--panel:#101e30;--panel2:#13243a;--line:#243a53;--text:#eaf3ff;--muted:#9bb0c8;--cyan:#35d7ee;--blue:#4e8dff;--purple:#9b7cff;--green:#38d996;--amber:#ffbf5a;--red:#ff6b79}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#10284a 0,#07111f 38%);color:var(--text);font:14px/1.45 Inter,system-ui,Segoe UI,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{max-width:1250px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));display:grid;place-items:center;color:#04101c;font-weight:900;font-size:19px;box-shadow:0 0 24px #35d7ee44}.brand h1{font-size:18px;letter-spacing:1.5px;margin:0}.brand small{color:var(--muted);letter-spacing:1px}.topright{display:flex;align-items:center;gap:8px}.pill{border:1px solid var(--line);border-radius:99px;padding:7px 11px;color:var(--muted);font-size:12px}.statusdot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:6px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:16px}.sidebar,.panel,.stat{background:linear-gradient(145deg,#12243aee,#0c1929ee);border:1px solid var(--line);border-radius:16px}.sidebar{padding:12px;height:max-content;position:sticky;top:12px}.nav{display:flex;align-items:center;gap:10px;width:100%;padding:11px;border:0;border-radius:10px;color:var(--muted);background:transparent;text-align:left;margin:3px 0}.nav.active,.nav:hover{background:#1b3551;color:white}.nav span{width:20px;text-align:center;color:var(--cyan)}.sidefoot{border-top:1px solid var(--line);margin-top:14px;padding:12px 7px 3px;color:var(--muted);font-size:11px}
+main{min-width:0}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin:4px 0 16px}.pagehead h2{font-size:23px;margin:0 0 4px}.sub{color:var(--muted);font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#172b43;color:var(--text);padding:9px 12px;border-radius:10px}.btn.primary{background:linear-gradient(110deg,#087f9d,#315fca);border:0}.btn:hover{filter:brightness(1.15)}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}.stat{padding:14px}.stat label{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:25px;margin:5px 0}.stat small{color:var(--muted)}.cyan{color:var(--cyan)}.amber{color:var(--amber)}.red{color:var(--red)}.green{color:var(--green)}
+.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.panel{padding:15px;margin-bottom:14px;min-width:0}.panelhead{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}.panel h3{margin:0;font-size:15px}.muted{color:var(--muted)}.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #22364d;font-size:12px}th{color:var(--muted);font-weight:600}td{color:#dce9f8}.tag{display:inline-block;border-radius:99px;padding:4px 8px;font-size:10px;background:#1b3851;color:#b8d7ef}.tag.good{background:#103c35;color:#65e4b0}.tag.warn{background:#49371d;color:#ffd28a}.tag.bad{background:#48232c;color:#ff9aa5}
+.barbg{height:7px;background:#23374d;border-radius:9px;overflow:hidden;margin-top:8px}.bar{height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue));border-radius:9px}.feeditem{padding:10px 0;border-bottom:1px solid #22364d}.feeditem:last-child{border:0}.feeditem strong{display:block;font-size:12px}.feeditem small{color:var(--muted)}
+.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{color:var(--muted);font-size:12px}.field input,.field select,.field textarea{width:100%;background:#091626;border:1px solid #2a4059;color:var(--text);padding:10px;border-radius:9px;outline:none}.field textarea{min-height:75px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan)}.formactions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+.hidden{display:none!important}.notice{border:1px solid #72552b;background:#332916;color:#ffdda5;border-radius:11px;padding:10px 12px;font-size:12px;margin-bottom:13px}.footnote{font-size:11px;color:var(--muted);margin:12px 2px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow:auto;gap:4px;padding:7px}.nav{white-space:nowrap;width:auto;padding:9px}.sidefoot{display:none}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.pagehead{flex-direction:column}.top{align-items:flex-start}.topright{flex-direction:column;align-items:flex-end}}
+@media(max-width:450px){.shell{padding:10px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.brand h1{font-size:15px}.pill{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+ <div class="brand"><div class="logo">P</div><div><h1>PITSAFE <span style="color:var(--cyan)">WATEROPS</span></h1><small>MINE WATER & DEWATERING OPERATIONS</small></div></div>
+ <div class="topright"><button class="btn" id="langToggle" type="button" onclick="toggleLanguage()">FR / EN</button><span class="pill"><i class="statusdot"></i><span id="demoLabel">LOCAL DEMO MODE</span></span><span class="pill" id="today"></span></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+ <button class="nav active" data-page="dashboard"><span>▦</span> Overview</button>
+ <button class="nav" data-page="assets"><span>◈</span> Pump & asset register</button>
+ <button class="nav" data-page="readings"><span>⌁</span> Water readings</button>
+ <button class="nav" data-page="inspections"><span>✓</span> Inspections</button>
+ <button class="nav" data-page="workorders"><span>⚒</span> Maintenance actions</button>
+ <button class="nav" data-page="incidents"><span>!</span> Issues & incidents</button>
+ <button class="nav" data-page="reports"><span>▤</span> Data & export</button>
+ <div class="sidefoot">PITSAFE AFRICA • Prototype v0.1<br>Designed for mine-site field teams</div>
+</aside>
+<main>
+<section id="dashboard" class="page">
+ <div class="pagehead"><div><h2>Operations overview</h2><div class="sub">A single view of recorded water infrastructure activity.</div></div><div class="actions"><button class="btn" onclick="exportData()">Export data</button><button class="btn primary" onclick="showPage('inspections')">＋ Record inspection</button></div></div>
+ <div class="notice">DEMO / PILOT ONLY: records are stored in this browser on this device. No sensors, mine systems, cloud backup or live alerts are connected.</div>
+ <div class="stats">
+  <div class="stat"><label>REGISTERED ASSETS</label><strong class="cyan" id="sAssets">0</strong><small>Pumps, sumps, pipelines</small></div>
+  <div class="stat"><label>WATER READINGS</label><strong id="sReadings">0</strong><small>Manually recorded</small></div>
+  <div class="stat"><label>OPEN ACTIONS</label><strong class="amber" id="sActions">0</strong><small>Maintenance follow-up</small></div>
+  <div class="stat"><label>OPEN ISSUES</label><strong class="red" id="sIssues">0</strong><small>Require review by site team</small></div>
+ </div>
+ <div class="grid2">
+  <div class="panel"><div class="panelhead"><h3>Recent field activity</h3><span class="tag">LIVE IN THIS DEVICE</span></div><div id="recent"></div></div>
+  <div class="panel"><div class="panelhead"><h3>Work queue</h3><span class="muted" id="queueCount">0 items</span></div><div id="queue"></div></div>
+ </div>
+ <div class="panel"><div class="panelhead"><h3>Getting started</h3></div><div class="grid2">
+  <div><strong>01 · Register an asset</strong><p class="muted">Add a pump, sump, pipeline or monitoring point with a unique site ID.</p><button class="btn" onclick="showPage('assets')">Add asset →</button></div>
+  <div><strong>02 · Record a reading</strong><p class="muted">Log a water level or pump observation with its unit and timestamp.</p><button class="btn" onclick="showPage('readings')">Add reading →</button></div>
+  <div><strong>03 · Inspect equipment</strong><p class="muted">Record condition, observations and follow-up required.</p><button class="btn" onclick="showPage('inspections')">Start inspection →</button></div>
+  <div><strong>04 · Track corrective work</strong><p class="muted">Assign an action, due date and status for site follow-up.</p><button class="btn" onclick="showPage('workorders')">Create action →</button></div>
+ </div></div>
+</section>
+<section id="assets" class="page hidden">
+ <div class="pagehead"><div><h2>Pump & asset register</h2><div class="sub">Create a basic inventory of critical water infrastructure.</div></div><button class="btn primary" onclick="toggleForm('assetForm')">＋ Add asset</button></div>
+ <div id="assetForm" class="panel hidden"><h3>New asset</h3><form id="assetAdd"><div class="formgrid">
+ <div class="field"><label>Asset ID *</label><input name="id" required placeholder="e.g. PUMP-001"></div>
+ <div class="field"><label>Asset name *</label><input name="name" required placeholder="Main dewatering pump"></div>
+ <div class="field"><label>Asset type</label><select name="type"><option>Pump</option><option>Sump</option><option>Pipeline</option><option>Water-level monitoring point</option><option>Valve</option><option>Other</option></select></div>
+ <div class="field"><label>Area / location</label><input name="area" placeholder="e.g. Pit East / Level 3"></div>
+ <div class="field"><label>Manufacturer / model</label><input name="model" placeholder="Optional"></div>
+ <div class="field"><label>Criticality</label><select name="criticality"><option>High</option><option>Medium</option><option>Low</option></select></div>
+ </div><div class="formactions"><button class="btn primary">Save asset</button><button type="button" class="btn" onclick="toggleForm('assetForm')">Cancel</button></div></form></div>
+ <div class="panel"><div class="panelhead"><h3>Registered assets</h3><span class="muted" id="assetCount">0 assets</span></div><div class="tablewrap" id="assetTable"></div></div>
+</section>
+<section id="readings" class="page hidden">
+ <div class="pagehead"><div><h2>Water readings</h2><div class="sub">Manual readings with units, time and recorder.</div></div><button class="btn primary" onclick="toggleForm('readingForm')">＋ Add reading</button></div>
+ <div class="notice">A reading is a recorded observation, not an automatic safety assessment. Follow the mine's approved monitoring plan and escalation limits.</div>
+ <div id="readingForm" class="panel hidden"><h3>Record water reading</h3><form id="readingAdd"><div class="formgrid">
+ <div class="field"><label>Monitoring point / asset *</label><input name="point" required placeholder="e.g. WL-01"></div>
+ <div class="field"><label>Reading type</label><select name="kind"><option>Water level</option><option>Flow rate</option><option>Pressure</option><option>Other</option></select></div>
+ <div class="field"><label>Value *</label><input name="value" type="number" step="any" required></div>
+ <div class="field"><label>Unit *</label><select name="unit"><option>m</option><option>mm</option><option>m³/h</option><option>bar</option><option>Other</option></select></div>
+ <div class="field"><label>Recorded by</label><input name="recorder" placeholder="Name / team"></div>
+ <div class="field"><label>Date and time</label><input name="date" type="datetime-local"></div>
+ <div class="field full"><label>Notes</label><textarea name="notes" placeholder="Conditions, method, instrument ID, calibration reference..."></textarea></div>
+ </div><div class="formactions"><button class="btn primary">Save reading</button><button type="button" class="btn" onclick="toggleForm('readingForm')">Cancel</button></div></form></div>
+ <div class="panel"><div class="panelhead"><h3>Reading history</h3><span class="muted" id="readingCount">0 readings</span></div><div class="tablewrap" id="readingTable"></div></div>
+</section>
+<section id="inspections" class="page hidden">
+ <div class="pagehead"><div><h2>Field inspections</h2><div class="sub">Record observations and evidence from authorised inspections.</div></div><button class="btn primary" onclick="toggleForm('inspectionForm')">＋ Record inspection</button></div>
+ <div class="notice">Only competent, authorised personnel should perform inspections or interpret safety-critical conditions. This tool does not certify equipment or site safety.</div>
+ <div id="inspectionForm" class="panel hidden"><h3>New inspection record</h3><form id="inspectionAdd"><div class="formgrid">
+ <div class="field"><label>Asset ID / location *</label><input name="asset" required placeholder="e.g. PUMP-001"></div>
+ <div class="field"><label>Inspection category</label><select name="category"><option>Pump condition</option><option>Pipeline / valves</option><option>Sump / drainage</option><option>Monitoring equipment</option><option>General observation</option></select></div>
+ <div class="field"><label>Observed condition</label><select name="condition"><option>Good</option><option>Monitor</option><option>Maintenance required</option><option>Escalate to site engineer</option></select></div>
+ <div class="field"><label>Inspector</label><input name="inspector" placeholder="Name / contractor"></div>
+ <div class="field"><label>Date</label><input name="date" type="date"></div>
+ <div class="field"><label>Follow-up required?</label><select name="follow"><option>Yes</option><option>No</option></select></div>
+ <div class="field full"><label>Observations / evidence reference</label><textarea name="notes" placeholder="Describe what was observed. Reference photo or site document IDs if applicable."></textarea></div>
+ </div><div class="formactions"><button class="btn primary">Save inspection</button><button type="button" class="btn" onclick="toggleForm('inspectionForm')">Cancel</button></div></form></div>
+ <div class="panel"><div class="panelhead"><h3>Inspection history</h3><span class="muted" id="inspectionCount">0 records</span></div><div class="tablewrap" id="inspectionTable"></div></div>
+</section>
+<section id="workorders" class="page hidden">
+ <div class="pagehead"><div><h2>Maintenance actions</h2><div class="sub">Track follow-up work, owners and due dates.</div></div><button class="btn primary" onclick="toggleForm('actionForm')">＋ Create action</button></div>
+ <div id="actionForm" class="panel hidden"><h3>New maintenance action</h3><form id="actionAdd"><div class="formgrid">
+ <div class="field"><label>Action title *</label><input name="title" required placeholder="Inspect discharge valve"></div>
+ <div class="field"><label>Related asset</label><input name="asset" placeholder="Asset ID"></div>
+ <div class="field"><label>Priority</label><select name="priority"><option>High</option><option>Medium</option><option>Low</option></select></div>
+ <div class="field"><label>Assigned to</label><input name="owner" placeholder="Person / team"></div>
+ <div class="field"><label>Due date</label><input name="due" type="date"></div>
+ <div class="field"><label>Status</label><select name="status"><option>Open</option><option>In progress</option><option>Completed</option></select></div>
+ <div class="field full"><label>Description</label><textarea name="description"></textarea></div>
+ </div><div class="formactions"><button class="btn primary">Save action</button><button type="button" class="btn" onclick="toggleForm('actionForm')">Cancel</button></div></form></div>
+ <div class="panel"><div class="panelhead"><h3>Maintenance work queue</h3><span class="muted" id="actionCount">0 actions</span></div><div class="tablewrap" id="actionTable"></div></div>
+</section>
+<section id="incidents" class="page hidden">
+ <div class="pagehead"><div><h2>Issues & incidents</h2><div class="sub">Log abnormal observations for review through site procedures.</div></div><button class="btn primary" onclick="toggleForm('issueForm')">＋ Log issue</button></div>
+ <div class="notice">This is not an emergency response system. Immediately notify the responsible mine control room / supervisor and follow site emergency procedures for urgent hazards.</div>
+ <div id="issueForm" class="panel hidden"><h3>Log an issue</h3><form id="issueAdd"><div class="formgrid">
+ <div class="field"><label>Issue title *</label><input name="title" required placeholder="Unexpected pump stoppage"></div>
+ <div class="field"><label>Location / asset</label><input name="location" placeholder="Area or asset ID"></div>
+ <div class="field"><label>Category</label><select name="category"><option>Pump failure</option><option>Leak / pipeline</option><option>Water ingress observation</option><option>Monitoring equipment</option><option>Other</option></select></div>
+ <div class="field"><label>Priority for review</label><select name="priority"><option>High</option><option>Medium</option><option>Low</option></select></div>
+ <div class="field"><label>Reported by</label><input name="reporter"></div>
+ <div class="field"><label>Status</label><select name="status"><option>Open</option><option>Under review</option><option>Closed</option></select></div>
+ <div class="field full"><label>Description / action already taken</label><textarea name="description"></textarea></div>
+ </div><div class="formactions"><button class="btn primary">Save issue</button><button type="button" class="btn" onclick="toggleForm('issueForm')">Cancel</button></div></form></div>
+ <div class="panel"><div class="panelhead"><h3>Issue register</h3><span class="muted" id="issueCount">0 issues</span></div><div class="tablewrap" id="issueTable"></div></div>
+</section>
+<section id="reports" class="page hidden">
+ <div class="pagehead"><div><h2>Data & export</h2><div class="sub">Keep a copy of your pilot records and share reports with authorised teams.</div></div></div>
+ <div class="grid2">
+  <div class="panel"><h3>Export records</h3><p class="muted">Download a JSON backup containing all records saved in this browser.</p><button class="btn primary" onclick="exportData()">Download JSON backup</button><p class="muted" style="margin-top:16px">Download a CSV file for each record category.</p><button class="btn" onclick="exportCSV('assets')">Assets CSV</button> <button class="btn" onclick="exportCSV('readings')">Readings CSV</button> <button class="btn" onclick="exportCSV('inspections')">Inspections CSV</button></div>
+  <div class="panel"><h3>Prototype information</h3><p class="muted">PITSAFE WATEROPS is an early demonstration of a field-record workflow.</p><p><span class="tag">Offline browser storage</span> <span class="tag">Manual data entry</span></p><p class="muted">It does not connect to mine SCADA, telemetry, sensors, ERP, user accounts or a central database. Records do not automatically sync between devices.</p><button class="btn" onclick="clearDemo()">Clear all local demo data</button></div>
+ </div>
+ <div class="panel"><h3>Data counts</h3><div id="dataCounts" class="muted"></div></div>
+</section>
+<div class="footnote">PITSAFE AFRICA • WATEROPS prototype • Operational recordkeeping only. Not an engineering design, safety certification, geotechnical assessment or emergency alert service.</div>
+</main>
+</div></div>
+<script>
+const keys=['assets','readings','inspections','actions','issues'];
+let db={}; keys.forEach(k=>{try{db[k]=JSON.parse(localStorage.getItem('pitsafe_'+k)||'[]')}catch(e){db[k]=[]}});
+const save=()=>keys.forEach(k=>localStorage.setItem('pitsafe_'+k,JSON.stringify(db[k])));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const stamp=()=>new Date().toLocaleString();
+document.getElementById('today').textContent=new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(p).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));render()}
+document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function toggleForm(id){document.getElementById(id).classList.toggle('hidden')}
+function table(rows,heads){if(!rows.length)return '<div class="empty">No records yet. Add your first record to begin.</div>';return '<table><thead><tr>'+heads.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>'}
+function tag(t){let c=/High|Escalate|Maintenance required/i.test(t)?'bad':/Medium|Monitor|In progress|Open/i.test(t)?'warn':'good';return `<span class="tag ${c}">${esc(t)}</span>`}
+function render(){
+document.getElementById('sAssets').textContent=db.assets.length;document.getElementById('sReadings').textContent=db.readings.length;document.getElementById('sActions').textContent=db.actions.filter(x=>x.status!=='Completed').length;document.getElementById('sIssues').textContent=db.issues.filter(x=>x.status!=='Closed').length;
+document.getElementById('assetCount').textContent=db.assets.length+' assets';document.getElementById('readingCount').textContent=db.readings.length+' readings';document.getElementById('inspectionCount').textContent=db.inspections.length+' records';document.getElementById('actionCount').textContent=db.actions.length+' actions';document.getElementById('issueCount').textContent=db.issues.length+' issues';
+document.getElementById('assetTable').innerHTML=table(db.assets.map(x=>`<tr><td><b>${esc(x.id)}</b></td><td>${esc(x.name)}</td><td>${esc(x.type)}</td><td>${esc(x.area)}</td><td>${tag(x.criticality)}</td></tr>`),['Asset ID','Name','Type','Area','Criticality']);
+document.getElementById('readingTable').innerHTML=table(db.readings.map(x=>`<tr><td>${esc(x.date||x.created)}</td><td>${esc(x.point)}</td><td><b>${esc(x.value)} ${esc(x.unit)}</b></td><td>${esc(x.kind)}</td><td>${esc(x.recorder)}</td></tr>`),['Date','Point','Reading','Type','Recorded by']);
+document.getElementById('inspectionTable').innerHTML=table(db.inspections.map(x=>`<tr><td>${esc(x.date||x.created)}</td><td>${esc(x.asset)}</td><td>${esc(x.category)}</td><td>${tag(x.condition)}</td><td>${esc(x.inspector)}</td><td>${esc(x.follow)}</td></tr>`),['Date','Asset','Category','Condition','Inspector','Follow-up']);
+document.getElementById('actionTable').innerHTML=table(db.actions.map((x,i)=>`<tr><td>${esc(x.title)}</td><td>${esc(x.asset)}</td><td>${tag(x.priority)}</td><td>${esc(x.owner)}</td><td>${esc(x.due)}</td><td><select aria-label="Update status" onchange="setStatus('actions',${i},this.value)" style="background:#091626;color:white;border:1px solid #2a4059;padding:5px;border-radius:6px"><option ${x.status==='Open'?'selected':''}>Open</option><option ${x.status==='In progress'?'selected':''}>In progress</option><option ${x.status==='Completed'?'selected':''}>Completed</option></select></td></tr>`),['Action','Asset','Priority','Owner','Due','Status']);
+document.getElementById('issueTable').innerHTML=table(db.issues.map((x,i)=>`<tr><td>${esc(x.title)}</td><td>${esc(x.location)}</td><td>${esc(x.category)}</td><td>${tag(x.priority)}</td><td>${esc(x.reporter)}</td><td><select aria-label="Update issue status" onchange="setStatus('issues',${i},this.value)" style="background:#091626;color:white;border:1px solid #2a4059;padding:5px;border-radius:6px"><option ${x.status==='Open'?'selected':''}>Open</option><option ${x.status==='Under review'?'selected':''}>Under review</option><option ${x.status==='Closed'?'selected':''}>Closed</option></select></td></tr>`),['Issue','Location','Category','Priority','Reporter','Status']);
+let feed=[];['assets','readings','inspections','actions','issues'].forEach(k=>db[k].forEach(x=>feed.push({t:x.created||x.date||'',label:x.name||x.point||x.asset||x.title||x.id,kind:k})));feed.sort((a,b)=>b.t.localeCompare(a.t));document.getElementById('recent').innerHTML=feed.length?feed.slice(0,6).map(x=>`<div class="feeditem"><strong>${esc(x.label)}</strong><small>${esc(x.kind)} · ${esc(x.t)}</small></div>`).join(''):'<div class="empty">Your field activity will appear here.</div>';
+let q=db.actions.filter(x=>x.status!=='Completed').slice(0,5);document.getElementById('queueCount').textContent=q.length+' open';document.getElementById('queue').innerHTML=q.length?q.map(x=>`<div class="feeditem"><strong>${esc(x.title)}</strong><small>${esc(x.asset||'No asset')} · Due ${esc(x.due||'not set')} · ${esc(x.status)}</small></div>`).join(''):'<div class="empty">No open maintenance actions.</div>';
+document.getElementById('dataCounts').textContent=keys.map(k=>k+': '+db[k].length).join('  •  ');
+}
+function formData(form){return Object.fromEntries(new FormData(form).entries())}
+function bind(id,key,required){document.getElementById(id).addEventListener('submit',e=>{e.preventDefault();let x=formData(e.target);x.created=stamp();db[key].unshift(x);save();e.target.reset();document.querySelectorAll('.panel').forEach(p=>{});let f={assetAdd:'assetForm',readingAdd:'readingForm',inspectionAdd:'inspectionForm',actionAdd:'actionForm',issueAdd:'issueForm'}[id];document.getElementById(f).classList.add('hidden');render()})}
+bind('assetAdd','assets');bind('readingAdd','readings');bind('inspectionAdd','inspections');bind('actionAdd','actions');bind('issueAdd','issues');
+function setStatus(k,i,v){db[k][i].status=v;save();render()}
+function download(name,content,type){let a=document.createElement('a'),u=URL.createObjectURL(new Blob([content],{type}));a.href=u;a.download=name;a.click();URL.revokeObjectURL(u)}
+function exportData(){download('pitsafe-waterops-backup.json',JSON.stringify({product:'PITSAFE WATEROPS',exported:stamp(),records:db},null,2),'application/json')}
+function exportCSV(k){let rows=db[k];if(!rows.length){alert('No '+k+' records to export yet.');return}let cols=[...new Set(rows.flatMap(x=>Object.keys(x)))];let csv=[cols.join(','),...rows.map(r=>cols.map(c=>'"'+String(r[c]??'').replace(/"/g,'""')+'"').join(','))].join('\n');download('pitsafe-'+k+'.csv',csv,'text/csv')}
+function clearDemo(){if(confirm('Delete all PITSAFE WATEROPS records saved in this browser? This cannot be undone.')){keys.forEach(k=>db[k]=[]);save();render()}}
+render();
+</script>
+
+<script>
+let currentLang = 'en';
+const translations = {
+  'Overview':'Vue générale','Pump & asset register':'Registre des équipements','Water readings':'Relevés d’eau',
+  'Inspections':'Inspections','Maintenance actions':'Actions de maintenance','Issues & incidents':'Problèmes et incidents',
+  'Data & export':'Données et exportation','LOCAL DEMO MODE':'MODE DÉMO LOCAL',
+  'Operations overview':'Vue des opérations','A single view of recorded water infrastructure activity.':'Vue d’ensemble des activités enregistrées sur les infrastructures hydrauliques.',
+  'Export data':'Exporter les données','＋ Record inspection':'＋ Enregistrer une inspection','＋ Add asset':'＋ Ajouter un équipement',
+  '＋ Add reading':'＋ Ajouter un relevé','＋ Create action':'＋ Créer une action','＋ Log issue':'＋ Signaler un problème',
+  'REGISTERED ASSETS':'ÉQUIPEMENTS ENREGISTRÉS','WATER READINGS':'RELEVÉS D’EAU','OPEN ACTIONS':'ACTIONS OUVERTES','OPEN ISSUES':'PROBLÈMES OUVERTS',
+  'Pumps, sumps, pipelines':'Pompes, puisards, conduites','Manually recorded':'Saisis manuellement',
+  'Maintenance follow-up':'Suivi de maintenance','Require review by site team':'À examiner par l’équipe du site',
+  'Recent field activity':'Activité récente sur le terrain','Work queue':'File des interventions',
+  'Getting started':'Pour commencer','01 · Register an asset':'01 · Enregistrer un équipement',
+  'Add a pump, sump, pipeline or monitoring point with a unique site ID.':'Ajouter une pompe, un puisard, une conduite ou un point de mesure avec un identifiant unique.',
+  'Add asset →':'Ajouter un équipement →','02 · Record a reading':'02 · Enregistrer un relevé',
+  'Log a water level or pump observation with its unit and timestamp.':'Consigner un niveau d’eau ou une observation de pompe avec son unité et son horodatage.',
+  'Add reading →':'Ajouter un relevé →','03 · Inspect equipment':'03 · Inspecter un équipement',
+  'Record condition, observations and follow-up required.':'Enregistrer l’état, les observations et les actions de suivi nécessaires.',
+  'Start inspection →':'Commencer l’inspection →','04 · Track corrective work':'04 · Suivre les actions correctives',
+  'Assign an action, due date and status for site follow-up.':'Attribuer une action, une échéance et un statut pour le suivi sur site.',
+  'Create action →':'Créer une action →',
+  'DEMO / PILOT ONLY: records are stored in this browser on this device. No sensors, mine systems, cloud backup or live alerts are connected.':'DÉMO / PILOTE UNIQUEMENT : les données sont enregistrées dans ce navigateur sur cet appareil. Aucun capteur, système minier, sauvegarde cloud ou alerte en direct n’est connecté.',
+  'Create a basic inventory of critical water infrastructure.':'Créer un inventaire de base des infrastructures hydrauliques critiques.',
+  'Registered assets':'Équipements enregistrés','New asset':'Nouvel équipement','Asset ID *':'Identifiant équipement *',
+  'Asset name *':'Nom de l’équipement *','Asset type':'Type d’équipement','Area / location':'Zone / emplacement',
+  'Manufacturer / model':'Fabricant / modèle','Criticality':'Criticité','Save asset':'Enregistrer l’équipement','Cancel':'Annuler',
+  'Manual readings with units, time and recorder.':'Relevés manuels avec unités, heure et nom de l’opérateur.',
+  'A reading is a recorded observation, not an automatic safety assessment. Follow the mine\\'s approved monitoring plan and escalation limits.':'Un relevé est une observation enregistrée, pas une évaluation automatique de sécurité. Respectez le plan de surveillance et les seuils d’escalade approuvés par la mine.',
+  'Record water reading':'Enregistrer un relevé d’eau','Monitoring point / asset *':'Point de mesure / équipement *',
+  'Reading type':'Type de relevé','Value *':'Valeur *','Unit *':'Unité *','Recorded by':'Enregistré par',
+  'Date and time':'Date et heure','Notes':'Notes','Save reading':'Enregistrer le relevé','Reading history':'Historique des relevés',
+  'Record observations and evidence from authorised inspections.':'Enregistrer les observations et preuves issues d’inspections autorisées.',
+  'Only competent, authorised personnel should perform inspections or interpret safety-critical conditions. This tool does not certify equipment or site safety.':'Seul le personnel compétent et autorisé doit effectuer les inspections ou interpréter les conditions critiques. Cet outil ne certifie ni les équipements ni la sécurité du site.',
+  'New inspection record':'Nouvel enregistrement d’inspection','Asset ID / location *':'Identifiant équipement / emplacement *',
+  'Inspection category':'Catégorie d’inspection','Observed condition':'État observé','Inspector':'Inspecteur',
+  'Date':'Date','Follow-up required?':'Suivi nécessaire ?','Observations / evidence reference':'Observations / référence des preuves',
+  'Save inspection':'Enregistrer l’inspection','Inspection history':'Historique des inspections',
+  'Track follow-up work, owners and due dates.':'Suivre les interventions, les responsables et les échéances.',
+  'New maintenance action':'Nouvelle action de maintenance','Action title *':'Titre de l’action *','Related asset':'Équipement concerné',
+  'Priority':'Priorité','Assigned to':'Attribué à','Due date':'Date limite','Status':'Statut','Description':'Description',
+  'Save action':'Enregistrer l’action','Maintenance work queue':'File des actions de maintenance',
+  'Log abnormal observations for review through site procedures.':'Signaler les observations anormales pour examen selon les procédures du site.',
+  'This is not an emergency response system. Immediately notify the responsible mine control room / supervisor and follow site emergency procedures for urgent hazards.':'Ceci n’est pas un système de réponse aux urgences. Pour tout danger urgent, avertissez immédiatement la salle de contrôle ou le superviseur de la mine et appliquez les procédures d’urgence du site.',
+  'Log an issue':'Signaler un problème','Issue title *':'Titre du problème *','Location / asset':'Emplacement / équipement',
+  'Category':'Catégorie','Reported by':'Signalé par','Description / action already taken':'Description / action déjà entreprise',
+  'Save issue':'Enregistrer le problème','Issue register':'Registre des problèmes',
+  'Keep a copy of your pilot records and share reports with authorised teams.':'Conserver une copie des données du pilote et partager les rapports avec les équipes autorisées.',
+  'Export records':'Exporter les enregistrements','Download a JSON backup containing all records saved in this browser.':'Télécharger une sauvegarde JSON contenant tous les enregistrements sauvegardés dans ce navigateur.',
+  'Download JSON backup':'Télécharger la sauvegarde JSON','Download a CSV file for each record category.':'Télécharger un fichier CSV pour chaque catégorie.',
+  'Prototype information':'Informations sur le prototype','PITSAFE WATEROPS is an early demonstration of a field-record workflow.':'PITSAFE WATEROPS est une première démonstration d’un processus d’enregistrement sur le terrain.',
+  'Offline browser storage':'Stockage local du navigateur','Manual data entry':'Saisie manuelle','It does not connect to mine SCADA, telemetry, sensors, ERP, user accounts or a central database. Records do not automatically sync between devices.':'Il n’est connecté ni au SCADA de la mine, ni à la télémétrie, aux capteurs, à un ERP, à des comptes utilisateurs ou à une base de données centrale. Les données ne se synchronisent pas automatiquement entre appareils.',
+  'Clear all local demo data':'Effacer toutes les données de démonstration locales',
+  'Data counts':'Nombre d’enregistrements',
+  'No records yet. Add your first record to begin.':'Aucun enregistrement. Ajoutez votre premier élément pour commencer.',
+  'Your field activity will appear here.':'Votre activité de terrain apparaîtra ici.',
+  'No open maintenance actions.':'Aucune action de maintenance ouverte.',
+  'No records to export yet.':'Aucun enregistrement à exporter pour le moment.',
+  'Open':'Ouvert','In progress':'En cours','Completed':'Terminé','Under review':'En cours d’examen',
+  'High':'Élevée','Medium':'Moyenne','Low':'Faible','Good':'Bon','Monitor':'À surveiller',
+  'Maintenance required':'Maintenance requise','Escalate to site engineer':'Transmettre à l’ingénieur du site',
+  'Pump':'Pompe','Sump':'Puisard','Pipeline':'Conduite','Water-level monitoring point':'Point de surveillance du niveau d’eau',
+  'Valve':'Vanne','Other':'Autre','Water level':'Niveau d’eau','Flow rate':'Débit','Pressure':'Pression',
+  'Pump condition':'État de la pompe','Pipeline / valves':'Conduites / vannes','Sump / drainage':'Puisard / drainage',
+  'Monitoring equipment':'Équipement de surveillance','General observation':'Observation générale','Yes':'Oui','No':'Non',
+  'Pump failure':'Panne de pompe','Leak / pipeline':'Fuite / conduite','Water ingress observation':'Observation d’infiltration d’eau'
+};
+function setLanguage(lang){
+ currentLang=lang; document.documentElement.lang=lang;
+ document.getElementById('langToggle').textContent=lang==='en'?'FR / EN':'EN / FR';
+ document.getElementById('demoLabel').textContent=lang==='en'?'LOCAL DEMO MODE':'MODE DÉMO LOCAL';
+ document.querySelectorAll('.nav').forEach(b=>{let s=b.textContent.trim().replace(/^[▦◈⌁✓⚒!▤]\s*/,'');let icon=b.querySelector('span').outerHTML;b.innerHTML=icon+' '+(lang==='fr'?(translations[s]||s):Object.keys(translations).find(k=>translations[k]===s)||s)});
+ document.querySelectorAll('h2,h3,.sub,.notice,.stat label,.stat small,.panelhead .tag,.panelhead .muted,.field label,.formactions button,.formgrid select option,.pagehead .btn,.grid2 button,.grid2 strong,.grid2 p').forEach(el=>{
+   if(!el.dataset.en) el.dataset.en=el.textContent;
+   let original=el.dataset.en.trim();
+   if(lang==='fr') el.textContent=translations[original]||original;
+   else el.textContent=Object.keys(translations).find(k=>translations[k]===original)||el.dataset.en;
+ });
+}
+function toggleLanguage(){setLanguage(currentLang==='en'?'fr':'en')}
+</script>
+
+</body></html>
