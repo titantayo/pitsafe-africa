@@ -1,40 +1,39 @@
-# PITSAFE AFRICA — WaterOps
+# PITSAFE AFRICA — Mine Water & Dewatering Intelligence
 
-**Bilingual mine-water and dewatering operations prototype.**
+Bilingual English/French prototype for mine-water and dewatering operations.
 
-PITSAFE AFRICA is an early-stage operational recordkeeping tool for mining contractors and mine-site teams. This prototype demonstrates how a team could record:
+## Current prototype capabilities
 
-- Pump and water-infrastructure assets
-- Manual water-level, flow and pressure readings
-- Field inspection observations
-- Maintenance actions and follow-up status
-- Issues and incidents for review
-- JSON and CSV exports
+- Pump and infrastructure register (browser demo data)
+- Manual water-level records (browser demo data)
+- Field inspection and maintenance records (browser demo data)
+- Site alert form for leaks, unexpected water ingress, ground-condition observations, sump overflow, pump failure, power loss and instrument faults
+- Organization-scoped cloud alert storage in Supabase for authenticated users with a valid PITSAFE profile
+- PITSAFE INTELLIGENCE AI assistant interface and authenticated Edge Function
 
-## Current version: browser prototype
+## Important integration status
 
-The current `index.html` is a **local browser demo**, not a production cloud application.
+This repository is an early-stage prototype, not a production mine operations system.
 
-- Records are stored in the browser's local storage on the device being used.
-- Records are not shared between employees or devices.
-- There is no login, organization/team administration, cloud synchronization, backup service, or role-based access in this prototype.
-- It does not connect to sensors, SCADA, telemetry, mine systems, or automatic alerts.
-- It does not control pumps or replace mine-approved safety procedures or emergency systems.
+- The general pump, reading, inspection and maintenance forms still use browser-local storage. They are not yet synchronized across team members.
+- Site alerts are connected to the Supabase `site_alerts` table, but require a signed-in user with a row in `public.profiles` assigned to the PITSAFE organization.
+- The AI Edge Function is deployed with JWT verification and checks the signed-in user's organization before reading operational records. It analyses pumps, readings, inspections, maintenance and site alerts.
+- AI requests remain inactive until an OpenAI API key is configured as the server-side Supabase Edge Function secret `OPENAI_API_KEY`. Never place this key in browser code or GitHub.
+- Owner account provisioning and employee invitations are not yet configured.
+- No SMS, email, push, siren, control-room integration, sensor/SCADA ingestion or guaranteed emergency notification is implemented.
+- No physical underground hazard is automatically detected. Site alerts are manually entered observations.
 
-## Run the prototype
+## Emergency and safety boundary
 
-Open `index.html` in a modern web browser. For more reliable testing, serve this repository as a static website.
+If people may be in danger, immediately use the mine's approved emergency communication channel, notify the control room/supervisor, and follow the mine's emergency and evacuation procedures. Do not wait for this application. The software is not a certified alarm, safety instrumented system, geotechnical monitoring system, engineering design, statutory inspection certificate, or substitute for competent site personnel.
 
-## Planned development
+## Next engineering work
 
-1. Add secure authentication and organization-based cloud data.
-2. Add employee accounts, roles, and shared records.
-3. Complete French and English interface coverage.
-4. Add audit history, reporting, and controlled exports.
-5. Test security, tenant isolation, backups, and mobile installation before any operational deployment.
-
-## Safety and data handling
-
-Use only data that you are authorized to record. Follow the mine's approved access, permit, HSE, and emergency procedures. Only competent and authorized personnel may perform specialist inspections or make safety-critical interpretations. This prototype is an operational recordkeeping aid; it is not an engineering design, statutory inspection certificate, geotechnical interpretation, safety clearance, or emergency alert service.
+1. Provision the first owner account securely and create employee invitation flow.
+2. Move pumps, readings, inspections and maintenance from browser storage into organization-scoped Supabase tables.
+3. Configure the AI provider secret server-side and test the AI with authorized accounts.
+4. Implement notification delivery with verified recipients, delivery logs, retries and acknowledgement workflows.
+5. Integrate approved field sensors/telemetry only after hardware, communications, alarm thresholds and mine procedures are specified and validated.
+6. Test tenant isolation, mobile behavior, backup/restore and operational failure modes before any mine-site pilot.
 
 **PITSAFE AFRICA — Know the condition. Monitor the risk. Protect operations.**
